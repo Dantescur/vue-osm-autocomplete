@@ -1,9 +1,9 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, test, vi, beforeEach } from "vitest";
-import OpenStreetMapAutocomplete from "../src/OpenStreetMapAutocomplete.vue";
+import { OpenstreetMapAutocomplete } from "../src/index";
 import { nextTick } from "vue";
 
-describe("OpenStreetMapAutocomplete", () => {
+describe("OpenstreetMapAutocomplete", () => {
   const mockLocation = {
     place_id: 123,
     licence: "Test Licence",
@@ -45,7 +45,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("renders correctly with default props", () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
 
     expect(wrapper.find("input").exists()).toBe(true);
     expect(wrapper.find("button").exists()).toBe(true);
@@ -55,7 +55,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("updates input value when modelValue changes", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete, {
+    const wrapper = mount(OpenstreetMapAutocomplete, {
       props: {
         modelValue: null,
       },
@@ -66,7 +66,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("shows dropdown when input is focused", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
 
     await wrapper.find("input").trigger("focus");
     expect(wrapper.find(".autocomplete-dropdown").exists()).toBe(true);
@@ -74,7 +74,7 @@ describe("OpenStreetMapAutocomplete", () => {
 
   test("debounces API calls on input", async () => {
     vi.useFakeTimers();
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
     const input = wrapper.find("input");
 
     await input.setValue("London");
@@ -89,7 +89,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("displays search results", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
 
     // Trigger input and focus
     await wrapper.find("input").trigger("focus");
@@ -108,7 +108,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("selects option on click", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
 
     // Set up and trigger search
     await wrapper.find("input").trigger("focus");
@@ -126,7 +126,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("handles keyboard navigation", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
 
     // Set up and trigger search
     await wrapper.find("input").trigger("focus");
@@ -151,7 +151,7 @@ describe("OpenStreetMapAutocomplete", () => {
       }),
     );
 
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
     await wrapper.find("input").trigger("focus");
     await wrapper.find("input").setValue("Unknown Place");
     await new Promise((resolve) => setTimeout(resolve, 300));
@@ -164,7 +164,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("closes dropdown when clicking outside", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete);
+    const wrapper = mount(OpenstreetMapAutocomplete);
     await wrapper.find("input").trigger("focus");
     expect(wrapper.find(".autocomplete-dropdown").exists()).toBe(true);
 
@@ -174,7 +174,7 @@ describe("OpenStreetMapAutocomplete", () => {
   });
 
   test("applies custom classes and styles", async () => {
-    const wrapper = mount(OpenStreetMapAutocomplete, {
+    const wrapper = mount(OpenstreetMapAutocomplete, {
       props: {
         classes: {
           root: "custom-root",
@@ -195,7 +195,7 @@ describe("OpenStreetMapAutocomplete", () => {
 
   test("uses custom endpoint when provided", async () => {
     const customEndpoint = "https://custom-osm-endpoint.com/search";
-    const wrapper = mount(OpenStreetMapAutocomplete, {
+    const wrapper = mount(OpenstreetMapAutocomplete, {
       props: { endpoint: customEndpoint },
     });
 
